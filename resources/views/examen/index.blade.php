@@ -2,7 +2,9 @@
 @section('contenido')
 
 <div class="container">
-
+	@include('examen.create')
+		<a href="" data-target="#modal-create" data-toggle="modal"><button class="btn btn-primary">Nuevo Examen</button></a>
+		<br><br>
 	<div class="row">
 		<div class="col">
 			<h3>Listado de Examenes</h3>
@@ -30,6 +32,13 @@
 
 </div>
 
+
+
+
+@endsection
+
+@section('pluging')
+
 	<script type="text/javascript">
 	$(document).ready(function() {
 	    $('#examenes').DataTable({
@@ -49,6 +58,5 @@
 	} );
 	
 	</script>
-
 
 @endsection

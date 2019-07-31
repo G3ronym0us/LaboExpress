@@ -17,5 +17,10 @@ Route::get('/', function () {
 
 Route::resource('paciente','PacienteController');
 Route::resource('examen','ExamenController');
+Route::resource('factura','FacturaController');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

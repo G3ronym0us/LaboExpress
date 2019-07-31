@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Factura;
+use App\DetalleFactura;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\FacturaFormRequest;
+use DB;
 
 class FacturaController extends Controller
 {
@@ -13,7 +19,9 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        //
+        $pacientes=DB::table('personas')->get();
+        $examenes=DB::table('exam')->get();
+        return view('factura.index',['pacientes'=>$pacientes, 'examenes'=>$examenes]);
     }
 
     /**
@@ -32,9 +40,33 @@ class FacturaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FacturaFormRequest $request)
     {
-        //
+        //try{
+
+            DB::beginTransaction();
+                $factura = new Factura;
+                $factura->id_paciente=$request->get('id_paciente');
+                $factura->impuesto='12';
+                $factura->estado='A';
+                $factura->save();
+                $id_examen = $request->get('id_examen');
+                $cantidad = $request->get('cantidad');
+                $cont = 0;
+                while ($cont < count($id_examen)) {
+                    $detalle = new DetalleFactura();
+                    $detalle->id_factura= $factura->id;
+                    $detalle->id_examen= $id_examen[$cont];
+                    $detalle->cantidad= $cantidad[$cont];
+                    $detalle->save();
+                    $cont++;
+                }
+            DB::commit();
+        catch(\Exception $e)
+        {
+            DB::rollback();
+        }
+        return Redirect::to('examenes');
     }
 
     /**

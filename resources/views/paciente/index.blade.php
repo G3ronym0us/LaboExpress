@@ -12,26 +12,32 @@
 	
 </div>
 
-<div class="container">
-	
-	<table id="paciente" class="table">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Nombres</th>
-				<th>Apellidos</th>
-				<th>Cedula</th>
-				<th>Sexo</th>
-				<th>Correo</th>
-				<th>Telefono</th>
-				<th>&nbsp;</th>
-			</tr>
-		</thead>
-		
-	</table>
+
+	<div class="table-responsive">
+		<table id="paciente" class="table table-striped w-auto table-fixed">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombres</th>
+					<th>Apellidos</th>
+					<th>Cedula</th>
+					<th>Sexo</th>
+					<th>Correo</th>
+					<th>Telefono</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			
+		</table>
+	</div>
 
 
-</div>
+
+
+
+@endsection
+
+@section('pluging')
 
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -55,6 +61,5 @@
 	} );
 	
 </script>
-
 
 @endsection
